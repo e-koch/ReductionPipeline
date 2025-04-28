@@ -10,11 +10,13 @@ Identify the continuum and line SPWs and split into separate MSs and
 directories.
 '''
 
-mySDM = sys.argv[-3]
+mySDM = sys.argv[-4]
 # Split out the lines, continuum or both
-split_type = sys.argv[-2]
+split_type = sys.argv[-3]
 # Set whether to reindex the SPWs or not.
-reindex_spws = True if sys.argv[-1] == "True" else False
+reindex_spws = True if sys.argv[-2] == "True" else False
+
+include_rrls = True if sys.argv[-1] == "True" else False
 
 ms_active = mySDM + ".ms"
 
@@ -46,7 +48,7 @@ split_ms(ms_active,
          outfolder_prefix=parentdir,
          split_type=split_type,
          continuum_kwargs={"baseband": 'both'},
-         line_kwargs={"include_rrls": False,
+         line_kwargs={"include_rrls": include_rrls,
                       "keep_backup_continuum": keep_backup_continuum},
          reindex=reindex_spws,
          overwrite=False)
